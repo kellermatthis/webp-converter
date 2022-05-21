@@ -1,0 +1,9 @@
+<p>Hint: Webp should pop up in new tab after selecting a file</p>
+<div *ngIf="showErrorMessage">
+    <p>{{errorMessage}}</p>
+</div>
+
+<div class="SpaceBetween">
+  <h3>Convert jpg to 1920px wide webp</h3>
+  <input type="file" class="file-input" (change)="onFileSelected($event, 1920)" #fileUploadBig>
+</div>

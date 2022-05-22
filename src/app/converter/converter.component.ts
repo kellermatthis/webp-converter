@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-converter',
@@ -6,16 +7,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./converter.component.css']
 })
 export class ConverterComponent {
+  
+  constructor(private toastr: ToastrService) {}
 
-  showErrorMessage: Boolean = false;
-  errorMessage: string = '';
   allowedImageTypes: Array<string> = ['jpg', 'jpeg', 'png'];
   widths: number[] = [ 2560, 1920, 1280 ];
   selectedWidth: number = 1920;
-
+  
   onFileSelected(event: any) {
 
-    this.showErrorMessage = false;
     const uploadedFile: File = event.target.files[0];
 
       if (uploadedFile && this.isValidImage(uploadedFile)) {
@@ -40,8 +40,7 @@ export class ConverterComponent {
 
         wembpImage.src = URL.createObjectURL(uploadedFile);
     } else {
-      this.errorMessage = `Type not supported. Supported types are: ${this.allowedImageTypes.join(', ')}.`;
-      this.showErrorMessage = true;
+      this.toastr.error(`Type not supported. Supported types are: ${this.allowedImageTypes.join(', ')}.`);
     }
   }
 

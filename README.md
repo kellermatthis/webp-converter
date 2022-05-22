@@ -4,5 +4,6 @@ Try it out: https://webpconverter.z6.web.core.windows.net/
 
 Currently converts images (png, jpg, jpeg) to 1920px webp
 
-<h3>Screenshot</h3>	
+<h3>Screenshot</h3>
+
 ![Screenshot](https://webpconverter.z6.web.core.windows.net/screenshot.PNG)

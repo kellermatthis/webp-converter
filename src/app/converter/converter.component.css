@@ -1,11 +1,15 @@
-.radioGroup{
+.horizontal{
     padding-bottom: 1rem;
 }
 
-.radioGroup label {
+.horizontal label {
     padding-right: 1rem;
 }
 
 .mat-radio-button {
     padding-right: 1rem;
+}
+
+.tooltip{
+    display: inline-block;
 }

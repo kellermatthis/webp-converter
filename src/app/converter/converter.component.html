@@ -1,6 +1,6 @@
 <div class="SpaceBetween">
-  <h3>Convert image ({{allowedImageTypes.join(', ')}}) to webp</h3>
-  <div class="radioGroup">
+  <h3>Convert image ({{allowedImageTypes.join(', ')}}) to webp. The converted image then opens in a new tab.</h3>
+  <div class="horizontal">
     <label>Target width (px):</label>
     <mat-radio-group [(ngModel)]="selectedWidth" >
       <mat-radio-button *ngFor="let width of widths" [value]="width">
@@ -8,7 +8,10 @@
       </mat-radio-button>
     </mat-radio-group>
   </div>
-  <div>
+  <div class="horizontal">
     <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUploadBig>    
+  </div>
+  <div class="tooltip" matTooltip="Please select a file first" [matTooltipDisabled]="fileSelected">
+    <button mat-raised-button color="primary" (click)="convertFile()" [disabled]="!fileSelected">Convert</button>
   </div>
 </div>

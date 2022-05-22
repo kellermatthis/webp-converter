@@ -4,6 +4,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { AppComponent } from './app.component';
 import { ConverterComponent } from './converter/converter.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -22,6 +24,8 @@ import { ToastrModule } from 'ngx-toastr';
     MatToolbarModule,
     MatCardModule,
     MatRadioModule,
+    MatButtonModule,
+    MatTooltipModule,
     FormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),

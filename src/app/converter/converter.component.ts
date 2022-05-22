@@ -13,35 +13,39 @@ export class ConverterComponent {
   allowedImageTypes: Array<string> = ['jpg', 'jpeg', 'png'];
   widths: number[] = [ 2560, 1920, 1280 ];
   selectedWidth: number = 1920;
+  uploadedFile: File | undefined = undefined;
+  fileSelected = false;
   
   onFileSelected(event: any) {
+    this.uploadedFile = event.target.files[0];   
+    this.fileSelected = true;   
+  }
 
-    const uploadedFile: File = event.target.files[0];
+  convertFile(){
+    if (this.uploadedFile && this.isValidImage(this.uploadedFile)) {
+      const formData = new FormData();
+      formData.append("thumbnail", this.uploadedFile);
 
-      if (uploadedFile && this.isValidImage(uploadedFile)) {
-        const formData = new FormData();
-        formData.append("thumbnail", uploadedFile);
+      const wembpImage = new Image();
 
-        const wembpImage = new Image();
+      wembpImage.onload = () => {
+          // to keep the same aspect ratio as before
+          const ratio = wembpImage.naturalWidth / wembpImage.naturalHeight;
 
-        wembpImage.onload = () => {
-            // to keep the same aspect ratio as before
-            const ratio = wembpImage.naturalWidth / wembpImage.naturalHeight;
+          const canvas = document.createElement('canvas');
+          canvas.width = this.selectedWidth;
+          canvas.height = this.selectedWidth / ratio;
+          canvas.getContext('2d')!.drawImage(wembpImage, 0, 0,canvas.width,canvas.height);
+          canvas.toBlob((blob) => {                
+              if(blob)
+                  window.open(window.URL.createObjectURL(new File([blob], 'name.webp', { type: blob.type })));
+          }, 'image/webp');
+      };
 
-            const canvas = document.createElement('canvas');
-            canvas.width = this.selectedWidth;
-            canvas.height = this.selectedWidth / ratio;
-            canvas.getContext('2d')!.drawImage(wembpImage, 0, 0,canvas.width,canvas.height);
-            canvas.toBlob((blob) => {                
-                if(blob)
-                    window.open(window.URL.createObjectURL(new File([blob], 'name.webp', { type: blob.type })));
-            }, 'image/webp');
-        };
-
-        wembpImage.src = URL.createObjectURL(uploadedFile);
-    } else {
-      this.toastr.error(`Type not supported. Supported types are: ${this.allowedImageTypes.join(', ')}.`);
-    }
+      wembpImage.src = URL.createObjectURL(this.uploadedFile);
+  } else {
+    this.toastr.error(`Type not supported. Supported types are: ${this.allowedImageTypes.join(', ')}.`);
+  }
   }
 
   isValidImage(p_file:File): Boolean {

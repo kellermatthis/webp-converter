@@ -1,9 +1,18 @@
-<p>Hint: Webp should pop up in new tab after selecting a file</p>
 <div *ngIf="showErrorMessage">
     <p>{{errorMessage}}</p>
 </div>
 
 <div class="SpaceBetween">
-  <h3>Convert image ({{allowedImageTypes.join(', ')}}) to 1920px wide webp</h3>
-  <input type="file" class="file-input" (change)="onFileSelected($event, 1920)" #fileUploadBig>
+  <h3>Convert image ({{allowedImageTypes.join(', ')}}) to webp</h3>
+  <div>
+    <label>Pixels:</label>
+    <mat-radio-group [(ngModel)]="selectedWidth" >
+      <mat-radio-button *ngFor="let width of widths" [value]="width">
+        {{width}}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div>
+    <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUploadBig>    
+  </div>
 </div>

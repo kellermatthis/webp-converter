@@ -10,8 +10,10 @@ export class ConverterComponent {
   showErrorMessage: Boolean = false;
   errorMessage: string = '';
   allowedImageTypes: Array<string> = ['jpg', 'jpeg', 'png'];
+  widths: number[] = [ 2560, 1920, 1280 ];
+  selectedWidth: number = 1920;
 
-  onFileSelected(event: any, p_width: number) {
+  onFileSelected(event: any) {
 
     this.showErrorMessage = false;
     const uploadedFile: File = event.target.files[0];
@@ -19,7 +21,6 @@ export class ConverterComponent {
       if (uploadedFile && this.isValidImage(uploadedFile)) {
         const formData = new FormData();
         formData.append("thumbnail", uploadedFile);
-        console.log(uploadedFile);
 
         const wembpImage = new Image();
 
@@ -28,8 +29,8 @@ export class ConverterComponent {
             const ratio = wembpImage.naturalWidth / wembpImage.naturalHeight;
 
             const canvas = document.createElement('canvas');
-            canvas.width = p_width;
-            canvas.height = p_width / ratio;
+            canvas.width = this.selectedWidth;
+            canvas.height = this.selectedWidth / ratio;
             canvas.getContext('2d')!.drawImage(wembpImage, 0, 0,canvas.width,canvas.height);
             canvas.toBlob((blob) => {                
                 if(blob)
@@ -46,7 +47,6 @@ export class ConverterComponent {
 
   isValidImage(p_file:File): Boolean {
     const typeProperties = p_file['type'].split('/');
-    console.log(typeProperties);
     return typeProperties[0] === 'image' && this.allowedImageTypes.includes(typeProperties[1]);
   }
 

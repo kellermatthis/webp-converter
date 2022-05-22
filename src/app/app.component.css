@@ -1,0 +1,13 @@
+.github{
+    width: 100%;
+}
+
+.icon{
+    float: right;
+    width: 55px;
+}
+
+.content{
+    max-width: 750px;
+    margin: 0 auto;
+}

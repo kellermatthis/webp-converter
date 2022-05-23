@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { saveAs } from 'file-saver';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-converter',
@@ -38,7 +40,7 @@ export class ConverterComponent {
           canvas.getContext('2d')!.drawImage(wembpImage, 0, 0,canvas.width,canvas.height);
           canvas.toBlob((blob) => {                
               if(blob)
-                  window.open(window.URL.createObjectURL(new File([blob], 'name.webp', { type: blob.type })));
+                FileSaver.saveAs(blob, this.uploadedFile?.name + '.webp');
           }, 'image/webp');
       };
 

@@ -41,7 +41,7 @@ export class ConverterComponent {
               canvas.getContext('2d')!.drawImage(wembpImage, 0, 0,canvas.width,canvas.height);
               canvas.toBlob((blob) => {                
                   if(blob)
-                    FileSaver.saveAs(blob, file.name + '.webp');
+                    FileSaver.saveAs(blob, file.name.replace(/\.[^.]*$/,'') + '.webp');
               }, 'image/webp');
               this.toastr.success(`${file.name} image was successfully converted to webp.`);
           };

@@ -6,4 +6,4 @@ Currently converts images (png, jpg, jpeg) to different webp sizes.
 
 <h3>Screenshot</h3>
 
-![Screenshot](https://webpconverter.z6.web.core.windows.net/screenshot.PNG)
+![Screenshot](https://webpconverter.z6.web.core.windows.net/screenshot.png)

@@ -9,9 +9,9 @@
     </mat-radio-group>
   </div>
   <div class="horizontal">
-    <input type="file" class="file-input" (change)="onFileSelected($event)" multiple>    
+    <input type="file" class="file-input" (change)="OnFileSelected($event)" multiple>    
   </div>
   <div class="tooltip" matTooltip="Please select a file first" [matTooltipDisabled]="fileSelected">
-    <button mat-raised-button color="primary" (click)="convertFiles()" [disabled]="!fileSelected">Convert</button>
+    <button mat-raised-button color="primary" (click)="ConvertFiles()" [disabled]="!fileSelected">Convert</button>
   </div>
 </div>

@@ -17,18 +17,15 @@ export class ConverterComponent {
   uploadedFiles: File[] | undefined = undefined;
   fileSelected = false;
   
-  onFileSelected(event: any) {
+  OnFileSelected(event: any) {
     this.uploadedFiles = event.target.files;   
     this.fileSelected = true;   
   }
 
-  convertFiles(){
+  ConvertFiles(){
     if (this.uploadedFiles) {
       for (const file of this.uploadedFiles) {
         if(this.isValidImage(file)){
-          const formData = new FormData();
-          formData.append("thumbnail", file);
-    
           const wembpImage = new Image();
     
           wembpImage.onload = () => {

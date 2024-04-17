@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import * as FileSaver from 'file-saver';
+import { Guid } from 'guid-typescript';
 
 @Component({
   selector: 'app-converter',
@@ -16,6 +17,7 @@ export class ConverterComponent {
   selectedWidth: number = 1920;
   uploadedFiles: File[] | undefined = undefined;
   fileSelected = false;
+  appendGuid = true;
   
   OnFileSelected(event: any) {
     this.uploadedFiles = event.target.files;   
@@ -37,8 +39,10 @@ export class ConverterComponent {
               canvas.height = this.selectedWidth / ratio;
               canvas.getContext('2d')!.drawImage(wembpImage, 0, 0,canvas.width,canvas.height);
               canvas.toBlob((blob) => {                
-                  if(blob)
-                    FileSaver.saveAs(blob, file.name.replace(/\.[^.]*$/,'') + '.webp');
+                  if(blob){
+                    const guid = this.appendGuid ? '-' + Guid.create().toString() : '';
+                    FileSaver.saveAs(blob, file.name.replace(/\.[^.]*$/,'') + guid + '.webp');
+                  }
               }, 'image/webp');
               this.toastr.success(`${file.name} image was successfully converted to webp.`);
           };

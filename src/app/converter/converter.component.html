@@ -9,6 +9,11 @@
     </mat-radio-group>
   </div>
   <div class="horizontal">
+    <mat-slide-toggle [(ngModel)]="appendGuid">
+        Append guid to filename 
+      </mat-slide-toggle>
+  </div>
+  <div class="horizontal">
     <input type="file" class="file-input" (change)="OnFileSelected($event)" multiple>    
   </div>
   <div class="tooltip" matTooltip="Please select a file first" [matTooltipDisabled]="fileSelected">
